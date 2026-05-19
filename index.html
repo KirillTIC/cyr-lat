@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RysskajáLatiniça</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 20px 16px 12px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #c9a0ff;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .toggle {
+      display: flex;
+      margin: 0 16px 16px;
+      background: #16213e;
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .toggle button {
+      flex: 1;
+      padding: 10px 8px;
+      border: none;
+      border-radius: 9px;
+      background: transparent;
+      color: #888;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .toggle button.active {
+      background: #c9a0ff;
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+
+    .areas {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 16px 16px;
+    }
+
+    .area-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .area-wrap label {
+      font-size: 0.72rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+      padding-left: 2px;
+    }
+
+    textarea {
+      flex: 1;
+      width: 100%;
+      min-height: 140px;
+      padding: 14px;
+      background: #16213e;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      color: #e0e0e0;
+      font-size: 1.05rem;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.5;
+    }
+
+    textarea:focus {
+      border-color: #c9a0ff;
+    }
+
+    textarea[readonly] {
+      background: #12192e;
+      color: #c9a0ff;
+    }
+
+    .copy-btn {
+      margin-top: 8px;
+      align-self: flex-end;
+      padding: 8px 16px;
+      background: #2a2a4a;
+      border: none;
+      border-radius: 8px;
+      color: #c9a0ff;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:active { background: #3a3a5a; }
+    .copy-btn.copied { color: #7fff7f; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>RysskajáLatiniça</h1>
+  <p>Rysskiÿ alfawit na latiničeskoÿ osnowe</p>
+</header>
+
+<div class="toggle">
+  <button class="active" id="btn1" onclick="setDir(0)">Кириллица → Латиница</button>
+  <button id="btn2" onclick="setDir(1)">Латиница → Кириллица</button>
+</div>
+
+<div class="areas">
+  <div class="area-wrap">
+    <label>Ввод</label>
+    <textarea id="input" placeholder="Введите текст..." oninput="convert()"></textarea>
+  </div>
+  <div class="area-wrap">
+    <label>Результат</label>
+    <textarea id="output" readonly placeholder="Результат появится здесь..."></textarea>
+    <button class="copy-btn" id="copyBtn" onclick="copyResult()">Копировать</button>
+  </div>
+</div>
+
+<script>
+  const cyrToLat = {
+    'а':'a','б':'b','в':'w','г':'g','д':'d','е':'e','ё':'ö','ж':'ž',
+    'з':'z','и':'i','й':'ÿ','к':'k','л':'l','м':'m','н':'n','о':'o',
+    'п':'p','р':'r','с':'s','т':'t','у':'y','ф':'f','х':'h','ц':'ç',
+    'ч':'č','ш':'š','щ':'šč','ъ':'æ','ы':'ø','ь':'į','э':'ē','ю':'ů','я':'ja'
+  };
+
+  const latToCyr = Object.entries(cyrToLat)
+    .map(([c, l]) => [l, c])
+    .sort((a, b) => b[0].length - a[0].length);
+
+  let direction = 0;
+
+  function setDir(d) {
+    direction = d;
+    document.getElementById('btn1').classList.toggle('active', d === 0);
+    document.getElementById('btn2').classList.toggle('active', d === 1);
+    convert();
+  }
+
+  function capitalize(s) {
+    return s ? s[0].toUpperCase() + s.slice(1) : s;
+  }
+
+  const RYL = /[a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ]/;
+
+  function preprocessCyrillic(s) {
+    return s
+      .replace(/(?<![А-Яа-яёЁ])или(?![А-Яа-яёЁ])/g, 'иль')
+      .replace(/(?<![А-Яа-яёЁ])Или(?![А-Яа-яёЁ])/g, 'Иль')
+      .replace(/(?<![А-Яа-яёЁ])ИЛИ(?![А-Яа-яёЁ])/g, 'ИЛЬ');
+  }
+
+  function applyMorphRules(s) {
+    return s
+      .replace(/Tįsja(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g, 'Ça')
+      .replace(/tįsja(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g, 'ça')
+      .replace(/Tsja(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g,  'Ça')
+      .replace(/tsja(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g,  'ça')
+      .replace(/Tį(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g,    'Č')
+      .replace(/tį(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g,    'č')
+      .replace(/T(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g,     'Č')
+      .replace(/t(?![a-zA-ZöžÿçčšæøįēůÖŽŸÇČŠÆØĮĒŮ])/g,     'č');
+  }
+
+  function toRysskaja(text) {
+    const raw = [...preprocessCyrillic(text)].map(ch => {
+      const lat = cyrToLat[ch.toLowerCase()];
+      if (!lat) return ch;
+      return ch === ch.toUpperCase() && ch !== ch.toLowerCase()
+        ? capitalize(lat) : lat;
+    }).join('');
+    return applyMorphRules(raw);
+  }
+
+  function toCyrillic(text) {
+    let result = '', i = 0;
+    while (i < text.length) {
+      let matched = false;
+      for (const [lat, cyr] of latToCyr) {
+        const upper = capitalize(lat);
+        if (text.startsWith(lat, i)) {
+          result += cyr; i += lat.length; matched = true; break;
+        }
+        if (text.startsWith(upper, i)) {
+          result += cyr.toUpperCase(); i += upper.length; matched = true; break;
+        }
+      }
+      if (!matched) result += text[i++];
+    }
+    return result;
+  }
+
+  function convert() {
+    const text = document.getElementById('input').value;
+    document.getElementById('output').value =
+      direction === 0 ? toRysskaja(text) : toCyrillic(text);
+  }
+
+  function copyResult() {
+    const out = document.getElementById('output').value;
+    if (!out) return;
+    navigator.clipboard.writeText(out);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Скопировано!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Копировать'; btn.classList.remove('copied'); }, 1500);
+  }
+</script>
+</body>
+</html>

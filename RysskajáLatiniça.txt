@@ -1,0 +1,71 @@
+================================================================
+                     RysskajáLatiniça
+            Rysskiÿ Alfawit na Latiničeskoÿ Osnowe
+================================================================
+
+TABLICA ALFAWITA / ТАБЛИЦА АЛФАВИТА
+------------------------------------------------------------
+А а  →  a          Н н  →  n
+Б б  →  b          О о  →  o
+В в  →  w          П п  →  p
+Г г  →  g          Р р  →  r
+Д д  →  d          С с  →  s
+Е е  →  e          Т т  →  t
+Ё ё  →  ö          У у  →  y
+Ж ж  →  ž          Ф ф  →  f
+З з  →  z          Х х  →  h
+И и  →  i          Ц ц  →  ç
+Й й  →  ÿ          Ч ч  →  č
+К к  →  k          Ш ш  →  š
+Л л  →  l          Щ щ  →  šč
+М м  →  m          Ъ ъ  →  æ
+                   Ы ы  →  ø
+                   Ь ь  →  į
+                   Э э  →  ē
+                   Ю ю  →  ů
+                   Я я  →  ja
+
+PRAWILA / ПРАВИЛА
+------------------------------------------------------------
+1. Syščestwitelįnøe pišytsja s bolįšoÿ bukwø
+   (как в немецком).
+   Primer: Doždį, Alfawit, Latiniça
+
+2. Prilagatelįnøe i syščestwitelįnøe mogyt
+   obæedinjatįsja w odno slowo (как в немецком).
+   Primer: Rysskajalatiniça, Yličnøÿdoždį
+
+3. Syščestwitelįnøe, otnosjašč iesja k odnomu obækty
+   ili ponjatiju w tekste, takže mogyt obæedinjatįsja.
+   Primer: Sposoborfografičeskogonapisanija
+           (= Sposob + orfografičeskogo + napisanija)
+
+4. "t" i "tį" w konce slowa zamenjajutsja na "č".
+   Primer: idöč (идёт), čitač (читать), pyč (путь)
+
+5. "ться" i "тся" zamenjajutsja na "ça".
+   Primer: kypaça (купаться), kypaeça (купается)
+
+7. Slowo "ili" (или) wsegda pišetsja kak "ilį".
+   Primer: ja ilį tø (я или ты)
+
+8. Bukwa "ø" možet čitatįsja kak "o" ilį ne čitatįsja wowse.
+   Primer: "søp" → "sup" ilį "sop" (суп)
+
+9. Alfawit dopyskaet raznøe sposobø čtenija,
+   otličnøe ot originalįnogo rysskogo jazøka.
+   Fonetika wdohnowlöna češskim i polįskim.
+   Primer: "spatį" možet čitatįsja kak:
+           - spati  (po-češski / po-polįski)
+           - spaši  (po-rysskÿ)
+           - spachi (po-nemeçki)
+
+WDOHNOWENIE / ВДОХНОВЕНИЕ
+------------------------------------------------------------
+Danøÿ alfawit wdohnowlön:
+  - Nemeçkim  (složenøe slowa, syščestwitelįnøe s zaglawnoÿ)
+  - Češskim   (diakritika: š, č, ž)
+  - Polįskim  (diakritika: į, ø, ç)
+  - Šwedskim  (estetika)
+
+================================================================
