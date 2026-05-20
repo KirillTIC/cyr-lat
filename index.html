@@ -199,7 +199,7 @@
   function toRysskaja(text) {
     const raw = [...preprocessCyrillic(text)].map(ch => {
       const lat = cyrToLat[ch.toLowerCase()];
-      if (!lat) return ch;
+      if (lat === undefined) return ch;
       return ch === ch.toUpperCase() && ch !== ch.toLowerCase()
         ? capitalize(lat) : lat;
     }).join('');
