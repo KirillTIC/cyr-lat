@@ -18,8 +18,8 @@ TABLICA ALFAWITA / ТАБЛИЦА АЛФАВИТА
 Й й  →  ÿ          Ч ч  →  č
 К к  →  k          Ш ш  →  š
 Л л  →  l          Щ щ  →  šč
-М м  →  m          Ъ ъ  →  æ
-                   Ы ы  →  ø
+М м  →  m          Ъ ъ  →  (удаляется)
+                   Ы ы  →  ė
                    Ь ь  →  į
                    Э э  →  ē
                    Ю ю  →  ů
@@ -46,19 +46,9 @@ PRAWILA / ПРАВИЛА
 5. "ться" i "тся" zamenjajutsja na "ça".
    Primer: kypaça (купаться), kypaeça (купается)
 
-7. Slowo "ili" (или) wsegda pišetsja kak "ilį".
+6. Slowo "ili" (или) wsegda pišetsja kak "ilį".
    Primer: ja ilį tø (я или ты)
 
-8. Bukwa "ø" možet čitatįsja kak "o" ilį ne čitatįsja wowse.
-   Primer: "søp" → "sup" ilį "sop" (суп)
-
-9. Alfawit dopyskaet raznøe sposobø čtenija,
-   otličnøe ot originalįnogo rysskogo jazøka.
-   Fonetika wdohnowlöna češskim i polįskim.
-   Primer: "spatį" možet čitatįsja kak:
-           - spati  (po-češski / po-polįski)
-           - spaši  (po-rysskÿ)
-           - spachi (po-nemeçki)
 
 WDOHNOWENIE / ВДОХНОВЕНИЕ
 ------------------------------------------------------------
